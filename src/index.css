@@ -202,3 +202,32 @@
       -2.6em 0em 0 0em rgba(255, 255, 255, 0.7), -1.8em -1.8em 0 0em #ffffff;
   }
 }
+
+.text-teal-400 {
+  background: "#2dd4bf";
+  background: -webkit-linear-gradient(to top, #2dd4bf, #2dd4bf);
+  background: linear-gradient(to top, #2dd4bf, #2dd4bf);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-orange-400 {
+  background: "#fb923c";
+  background: -webkit-linear-gradient(to top, #fb923c, #fb923c);
+  background: linear-gradient(to top, #fb923c, #fb923c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-yellow-200 {
+  background: "#fef08a";
+  background: -webkit-linear-gradient(to top, #fef08a, #fef08a);
+  background: linear-gradient(to top, #fef08a, #fef08a);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-gray-400 {
+  background: "#9ca3af";
+  background: -webkit-linear-gradient(to top, #9ca3af, #9ca3af);
+  background: linear-gradient(to top, #9ca3af, #9ca3af);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

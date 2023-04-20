@@ -45,7 +45,6 @@ const ProjectCard = ({
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
         {tag_ids.map((tag) => {
-          console.log(tag.tag_color);
           return (
             <p key={tag.tag_name} className={`text-[14px] ${tag.tag_color} `}>
               #{tag.tag_name}
