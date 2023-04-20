@@ -2,18 +2,18 @@ import React from "react";
 import Tilt from "react-parallax-tilt";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
-import { github } from "../assets";
+import { githubImg } from "../assets";
 import { SectionWrapper } from "../hoc";
-import { projects } from "../constants";
+// import { projects } from "../constants";
 import { fadeIn, textVariant } from "../utils/motion";
 
 const ProjectCard = ({
   index,
-  name,
-  description,
-  tags,
-  image,
-  source_code_link,
+  project_name,
+  project_description,
+  tag_ids,
+  project_img_url,
+  git_hub,
 }) => (
   <motion.div variants={fadeIn("up", "spring", index * 0.5, 0.75)}>
     <Tilt
@@ -22,17 +22,17 @@ const ProjectCard = ({
     >
       <div className="relative w-full h-[230px]">
         <img
-          src={image}
-          alt={name}
+          src={project_img_url}
+          alt={project_name}
           className="w-full h-full object-cover rounded-2xl"
         />
         <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
           <div
-            onClick={() => window.open(source_code_link, "_blank")}
+            onClick={() => window.open(git_hub, "_blank")}
             className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
           >
             <img
-              src={github}
+              src={githubImg}
               alt="github"
               className="w-1/2 h-1/2 object-contain"
             />
@@ -40,21 +40,29 @@ const ProjectCard = ({
         </div>
       </div>
       <div className="mt-5">
-        <h3 className="text-white font-bold text-[24px]">{name}</h3>
-        <p className="mt-2 text-secondary text-[14px]">{description}</p>
+        <h3 className="text-white font-bold text-[24px]">{project_name}</h3>
+        <p className="mt-2 text-secondary text-[14px]">{project_description}</p>
       </div>
       <div className="mt-4 flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <p key={tag.name} className={`text-[14px] ${tag.color} `}>
-            #{tag.name}
-          </p>
-        ))}
+        {tag_ids.map((tag) => {
+          console.log(tag.tag_color);
+          return (
+            <p key={tag.tag_name} className={`text-[14px] ${tag.tag_color} `}>
+              #{tag.tag_name}
+            </p>
+          );
+        })}
       </div>
     </Tilt>
   </motion.div>
 );
 
-const Works = () => {
+const Works = ({ projects }) => {
+  // if (!projects || projects.length === 0) {
+  //   return <div> Loading... </div>;
+  // }
+  console.log(projects);
+
   return (
     <>
       <motion.div variants={textVariant()}>
