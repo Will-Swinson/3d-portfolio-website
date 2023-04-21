@@ -1,5 +1,5 @@
 
-DROP TABLE IF EXISTS projects, youtube_vids, tags, project_tags;
+DROP TABLE IF EXISTS projects, youtube_vids, tags, project_tags, hashtags, youtube_tags;
 
 
 CREATE TABLE projects(
@@ -15,8 +15,11 @@ CREATE TABLE tags(tag_id serial NOT NULL, name char(255), color char(255), PRIMA
 
 CREATE TABLE project_tags(
 project_id int NOT NULL REFERENCES projects(project_id), 
-tag_id int NOT NULL REFERENCES tags(tag_id) 
+tag_id int NOT NULL REFERENCES tags(tag_id)
 );
+
+
+CREATE TABLE hashtags(hash_id serial NOT NULL, name char(255), color char(255), PRIMARY KEY(hash_id));
 
 CREATE TABLE youtube_vids(
 video_id serial NOT NULL,
@@ -27,5 +30,8 @@ youtube_url char(255),
 PRIMARY KEY (video_id)
 );
 
-
+CREATE TABLE youtube_tags(
+video_id int NOT NULL REFERENCES youtube_vids(video_id),
+hash_id int NOT NULL REFERENCES hashtags(hash_id)
+);
 

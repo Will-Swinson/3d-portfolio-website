@@ -2,6 +2,7 @@ import { BrowserRouter } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import {
   About,
+  Youtube,
   Contact,
   Experience,
   Feedbacks,
@@ -19,15 +20,26 @@ const App = () => {
   useEffect(() => {
     console.log("COMPONET MOUNT");
     async function getData() {
-      const res = await fetch("http://localhost:5172/test");
+      const res = await fetch("http://localhost:5172/projects");
       const data = await res.json();
-      console.log(data);
+
       setProjects(data);
       setLoading(false);
-      console.log(projects);
-      console.log("I RAN!!!");
-      // .then((data) => setProjects((projects = data)))
-      // .then(() => console.log(projects));
+    }
+    getData();
+  }, []);
+
+  let [youtubeVids, setYoutubeVids] = useState([]);
+  const [loadingVids, setLoadingVids] = useState(true);
+
+  useEffect(() => {
+    console.log("COMPONET MOUNT");
+    async function getData() {
+      const res = await fetch("http://localhost:5172/youtube");
+      const data = await res.json();
+
+      setYoutubeVids(data);
+      setLoadingVids(false);
     }
     getData();
   }, []);
@@ -40,6 +52,11 @@ const App = () => {
         </div>
 
         <About />
+        {loadingVids ? (
+          <div>Loading...</div>
+        ) : (
+          <Youtube youtubeVids={youtubeVids} />
+        )}
         <Experience />
         <Tech />
         {loading ? <div>Loading...</div> : <Works projects={projects} />}

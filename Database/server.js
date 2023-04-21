@@ -14,7 +14,7 @@ const sql = postgres("postgres://wswinson:Swinson1!@127.0.0.1:5432/portfolio");
 app.use(cors());
 
 // Define a route that retrieves data from the database
-app.get("/test", async (req, res) => {
+app.get("/projects", async (req, res) => {
   try {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
@@ -43,6 +43,43 @@ app.get("/test", async (req, res) => {
     projects.git_hub,
     projects.project_description;
 `;
+
+    console.log(data);
+    res.json(data);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
+  }
+});
+
+// Youtube Route
+app.get("/youtube", async (req, res) => {
+  try {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+    const data = await sql`SELECT
+    youtube_vids.video_id,
+    youtube_vids.video_name,
+    youtube_vids.video_img_url,
+    youtube_vids.video_url,
+    youtube_vids.youtube_url,
+    json_agg(
+      json_build_object(
+        'name', hashtags.name,
+        'color', hashtags.color
+      )
+    ) AS hash_ids
+  FROM youtube_vids
+  LEFT JOIN youtube_tags ON youtube_vids.video_id = youtube_tags.video_id
+  LEFT JOIN hashtags ON youtube_tags.hash_id = hashtags.hash_id
+  GROUP BY
+    youtube_vids.video_id,
+    youtube_vids.video_name,
+    youtube_vids.video_img_url,
+    youtube_vids.video_url,
+    youtube_vids.youtube_url;`;
 
     console.log(data);
     res.json(data);
