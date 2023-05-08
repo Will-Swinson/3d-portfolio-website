@@ -20,7 +20,9 @@ const App = () => {
   useEffect(() => {
     console.log("COMPONET MOUNT");
     async function getData() {
-      const res = await fetch("http://localhost:5172/projects");
+      const res = await fetch(
+        "https://threed-portfolio-web-api.onrender.com/projects"
+      );
       const data = await res.json();
 
       setProjects(data);
@@ -35,7 +37,9 @@ const App = () => {
   useEffect(() => {
     console.log("COMPONET MOUNT");
     async function getData() {
-      const res = await fetch("http://localhost:5172/youtube");
+      const res = await fetch(
+        "https://threed-portfolio-web-api.onrender.com/youtube"
+      );
       const data = await res.json();
 
       setYoutubeVids(data);
@@ -43,6 +47,7 @@ const App = () => {
     }
     getData();
   }, []);
+
   return (
     <BrowserRouter>
       <div className="relative z-0 bg-black">
