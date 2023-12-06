@@ -41,7 +41,7 @@ const App = () => {
         "https://threed-portfolio-web-api.onrender.com/youtube"
       );
       const data = await res.json();
-
+      console.log(data);
       setYoutubeVids(data);
       setLoadingVids(false);
     }
